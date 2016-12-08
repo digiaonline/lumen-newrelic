@@ -7,7 +7,7 @@ properly named and that your exceptions are properly logged in New Relic.
 
 - PHP 5.6 or newer
 - [Composer](http://getcomposer.org)
-- [Lumen](https://lumen.laravel.com/) 5.3 or newer
+- [Lumen](https://lumen.laravel.com/) 5.2 or newer
 
 ## Usage
 
