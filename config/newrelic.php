@@ -9,9 +9,4 @@ return [
      */
     'transaction_name_pattern' => env('NEWRELIC_TRANSACTION_NAME_PATTERN', '{controller}'),
 
-    /**
-     * Whether to register the Monolog New Relic handler
-     */
-    'register_monolog_handler' => env('NEWRELIC_REGISTER_MONOLOG_HANDLER', false),
-
 ];

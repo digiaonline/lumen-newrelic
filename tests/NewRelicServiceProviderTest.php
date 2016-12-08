@@ -3,7 +3,8 @@
 namespace Nord\Lumen\NewRelic\Tests;
 
 use Laravel\Lumen\Application;
-use Nord\Lumen\NewRelic\Handler\NewRelicMonologHandler;
+use Nord\Lumen\ChainedExceptionHandler\ChainedExceptionHandler;
+use Nord\Lumen\NewRelic\NewRelicExceptionHandler;
 use Nord\Lumen\NewRelic\NewRelicServiceProvider;
 
 /**
@@ -18,7 +19,6 @@ class NewRelicServiceProviderTest extends \PHPUnit_Framework_TestCase
      */
     private static $expectedConfigurationKeys = [
         'transaction_name_pattern',
-        'register_monolog_handler',
     ];
 
 
@@ -51,23 +51,23 @@ class NewRelicServiceProviderTest extends \PHPUnit_Framework_TestCase
 
 
     /**
-     * Tests that the Monolog New Relic error handler has been registered
+     * Tests that the exception handler is added correctly
+     *
+     * @expectedException \Exception
      */
     public function testRegisterMonologHandler()
     {
         $app = new Application();
         $app->register(NewRelicServiceProvider::class);
 
-        $handlers        = app('log')->getHandlers();
-        $newRelicHandler = null;
+        $app->singleton(
+            \Illuminate\Contracts\Debug\ExceptionHandler::class,
+            new ChainedExceptionHandler(
+                new \Laravel\Lumen\Exceptions\Handler(), [
+                new NewRelicExceptionHandler(),
+            ])
+        );
 
-        foreach ($handlers as $handler) {
-            if ($handler instanceof NewRelicMonologHandler) {
-                $newRelicHandler = $handler;
-                break;
-            }
-        }
-
-        $this->assertNotNull($newRelicHandler);
+        throw new \Exception();
     }
 }

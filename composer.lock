@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "abe029f3254fe7188975b322a69fd67e",
-    "content-hash": "be3e91ca9a78230cfd19d808ec71addc",
+    "hash": "7dd096464266dab4594b89846e3696e3",
+    "content-hash": "d4c34a723927d32e15a1613ecbeed96f",
     "packages": [
         {
             "name": "doctrine/inflector",
@@ -213,6 +213,54 @@
                 "newrelic"
             ],
             "time": "2014-08-18 12:08:45"
+        },
+        {
+            "name": "nordsoftware/lumen-chained-exception-handler",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/nordsoftware/lumen-chained-exception-handler.git",
+                "reference": "071252333433733c81173175b12648aacbb1cef9"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/nordsoftware/lumen-chained-exception-handler/zipball/071252333433733c81173175b12648aacbb1cef9",
+                "reference": "071252333433733c81173175b12648aacbb1cef9",
+                "shasum": ""
+            },
+            "require": {
+                "illuminate/support": "^5.2",
+                "php": ">=5.6.4"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "^5.7"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Nord\\Lumen\\ChainedExceptionHandler\\": "src/"
+                }
+            },
+            "autoload-dev": {
+                "psr-4": {
+                    "Nord\\Lumen\\ChainedExceptionHandler\\Tests\\": "tests/"
+                }
+            },
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Sam Stenvall",
+                    "email": "sam.stenvall@nordsoftware.com"
+                }
+            ],
+            "description": "A chained exception handler for the Lumen framework",
+            "support": {
+                "source": "https://github.com/nordsoftware/lumen-chained-exception-handler/tree/master",
+                "issues": "https://github.com/nordsoftware/lumen-chained-exception-handler/issues"
+            },
+            "time": "2016-12-08 15:41:19"
         },
         {
             "name": "paragonie/random_compat",
@@ -3410,7 +3458,9 @@
     ],
     "aliases": [],
     "minimum-stability": "stable",
-    "stability-flags": [],
+    "stability-flags": {
+        "nordsoftware/lumen-chained-exception-handler": 20
+    },
     "prefer-stable": false,
     "prefer-lowest": false,
     "platform": {
