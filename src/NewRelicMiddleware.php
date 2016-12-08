@@ -74,34 +74,34 @@ class NewRelicMiddleware
     /**
      * Get the current controller / action
      *
-     * @param array $route the details about the current route
+     * @param mixed $route the details about the current route
      *
      * @return string
      */
-    protected function getController(array $route)
+    protected function getController($route)
     {
-        if (isset($route[1]) && isset($route[1]['uses'])) {
+        if (is_array($route) && isset($route[1]) && isset($route[1]['uses'])) {
             return $route[1]['uses'];
         }
 
-        return 'Closure';
+        return 'index.php';
     }
 
 
     /**
      * Get the current route name
      *
-     * @param array $route the details about the current route
+     * @param mixed $route the details about the current route
      *
      * @return string
      */
-    protected function getRouteName(array $route)
+    protected function getRouteName($route)
     {
-        if (isset($route[1]) && isset($route[1]['as'])) {
+        if (is_array($route) && isset($route[1]) && isset($route[1]['as'])) {
             return $route[1]['as'];
         }
 
-        return '';
+        return 'index.php';
     }
 
 }
