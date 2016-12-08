@@ -28,7 +28,7 @@ class NewRelicMiddlewareTest extends \PHPUnit_Framework_TestCase
 
         $response = $app->handle(Request::create('/', 'GET'));
         $this->assertEquals(200, $response->getStatusCode());
-        $this->assertEquals('Closure ', $response->getContent());
+        $this->assertEquals('index.php index.php', $response->getContent());
     }
 
 
