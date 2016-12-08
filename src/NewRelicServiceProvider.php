@@ -5,7 +5,7 @@ namespace Nord\Lumen\NewRelic;
 use Illuminate\Support\ServiceProvider;
 use Intouch\Newrelic\Newrelic;
 use Laravel\Lumen\Application;
-use Monolog\Handler\NewRelicHandler;
+use Nord\Lumen\NewRelic\Handler\NewRelicMonologHandler;
 
 /**
  * Class NewRelicServiceProvider
@@ -38,7 +38,7 @@ class NewRelicServiceProvider extends ServiceProvider
     public function boot()
     {
         if (app('config')['newrelic']['register_monolog_handler']) {
-            app('log')->pushHandler(new NewRelicHandler());
+            app('log')->pushHandler(new NewRelicMonologHandler());
         }
     }
 

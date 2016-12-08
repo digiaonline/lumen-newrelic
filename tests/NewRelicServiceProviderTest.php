@@ -3,7 +3,7 @@
 namespace Nord\Lumen\NewRelic\Tests;
 
 use Laravel\Lumen\Application;
-use Monolog\Handler\NewRelicHandler;
+use Nord\Lumen\NewRelic\Handler\NewRelicMonologHandler;
 use Nord\Lumen\NewRelic\NewRelicServiceProvider;
 
 /**
@@ -62,7 +62,7 @@ class NewRelicServiceProviderTest extends \PHPUnit_Framework_TestCase
         $newRelicHandler = null;
 
         foreach ($handlers as $handler) {
-            if ($handler instanceof NewRelicHandler) {
+            if ($handler instanceof NewRelicMonologHandler) {
                 $newRelicHandler = $handler;
                 break;
             }
