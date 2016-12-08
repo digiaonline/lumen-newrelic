@@ -14,7 +14,16 @@ class NewRelicServiceProviderTest extends \PHPUnit_Framework_TestCase
 {
 
     /**
-     *
+     * @var array
+     */
+    private static $expectedConfigurationKeys = [
+        'transaction_name_pattern',
+        'register_monolog_handler',
+    ];
+
+
+    /**
+     * Tests that the service provider registers without issues
      */
     public function testRegisterServiceProvider()
     {
@@ -34,8 +43,10 @@ class NewRelicServiceProviderTest extends \PHPUnit_Framework_TestCase
         $configKey = NewRelicServiceProvider::CONFIG_KEY;
 
         $this->assertArrayHasKey($configKey, $app['config']);
-        $this->assertArrayHasKey('transaction_name_pattern', $app['config'][$configKey]);
-        $this->assertArrayHasKey('register_monolog_handler', $app['config'][$configKey]);
+
+        foreach (self::$expectedConfigurationKeys as $expectedConfigurationKey) {
+            $this->assertArrayHasKey($expectedConfigurationKey, $app['config'][$configKey]);
+        }
     }
 
 
