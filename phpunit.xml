@@ -1,0 +1,16 @@
+<phpunit>
+    <testsuites>
+        <testsuite name="nordsoftware/lumen-newrelic">
+            <directory>tests</directory>
+        </testsuite>
+    </testsuites>
+    <filter>
+        <whitelist>
+            <directory suffix=".php">src/</directory>
+        </whitelist>
+    </filter>
+    <php>
+        <env name="NEWRELIC_TRANSACTION_NAME_PATTERN" value="{controller} {routeName}"/>
+        <env name="NEWRELIC_REGISTER_MONOLOG_HANDLER" value="true"/>
+    </php>
+</phpunit>

@@ -1,0 +1,31 @@
+{
+    "name": "nordsoftware/lumen-newrelic",
+    "description": "New Relic instrumentation for the Lumen framework",
+    "type": "library",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Sam Stenvall",
+            "email": "sam.stenvall@nordsoftware.com"
+        }
+    ],
+    "require": {
+        "php": ">=5.6.4",
+        "intouch/newrelic": "^1.0",
+        "illuminate/support": "^5.3"
+    },
+    "require-dev": {
+        "laravel/lumen-framework": "^5.3",
+        "phpunit/phpunit": "^5.7"
+    },
+    "autoload": {
+        "psr-4": {
+            "Nord\\Lumen\\NewRelic\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Nord\\Lumen\\NewRelic\\Tests\\": "tests/"
+        }
+    }
+}
