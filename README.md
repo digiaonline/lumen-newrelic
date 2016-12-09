@@ -51,6 +51,12 @@ $app->middleware([
 
 This will ensure that transactions are named properly.
 
+Finally, register the service provider:
+
+```php
+$app->register(Nord\Lumen\NewRelic\NewRelicServiceProvider::class);
+```
+
 ## Customizing transaction names
 
 By default the transaction name will use the `controller@action` assigned to the route. If that fails, it will use the 
