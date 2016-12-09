@@ -49,7 +49,8 @@ class NewRelicMiddleware
 
 
     /**
-     * Builds the transaction name
+     * Builds the transaction name. It will return the assigned controller action first, then the route name before
+     * falling back to just "index.php"
      *
      * @param Request $request
      *
@@ -57,48 +58,16 @@ class NewRelicMiddleware
      */
     public function getTransactionName(Request $request)
     {
-        return str_replace(
-            [
-                '{controller}',
-                '{routeName}',
-            ],
-            [
-                $this->getController($request->route()),
-                $this->getRouteName($request->route()),
-            ],
-            app()['config']->get('newrelic.transaction_name_pattern')
-        );
-    }
+        $route = $request->route();
 
-
-    /**
-     * Get the current controller / action
-     *
-     * @param mixed $route the details about the current route
-     *
-     * @return string
-     */
-    protected function getController($route)
-    {
-        if (is_array($route) && isset($route[1]) && isset($route[1]['uses'])) {
-            return $route[1]['uses'];
-        }
-
-        return 'index.php';
-    }
-
-
-    /**
-     * Get the current route name
-     *
-     * @param mixed $route the details about the current route
-     *
-     * @return string
-     */
-    protected function getRouteName($route)
-    {
-        if (is_array($route) && isset($route[1]) && isset($route[1]['as'])) {
-            return $route[1]['as'];
+        if (is_array($route)) {
+            // Try the assigned controller action
+            if (isset($route[1]) && isset($route[1]['uses'])) {
+                return $route[1]['uses'];
+            } // Try named routes
+            elseif (isset($route[1]) && isset($route[1]['as'])) {
+                return $route[1]['as'];
+            }
         }
 
         return 'index.php';

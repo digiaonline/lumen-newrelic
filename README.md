@@ -19,10 +19,6 @@ Run the following command to install the package through Composer:
 composer require nordsoftware/lumen-newrelic
 ```
 
-### Configure
-
-Copy the configuration template in `config/newrelic.php` to your application's `config` directory.
-
 ### Bootstrapping
 
 Add the following lines to ```bootstrap/app.php```:
@@ -38,15 +34,15 @@ $app->middleware([
 ]);
 ```
 
-Additionally, to ensure exceptions are properly logged to New Relic you'll want to add this to your production 
-`.env` file:
+This will ensure that transactions are named properly.
 
-```
-NEWRELIC_REGISTER_MONOLOG_HANDLER=true
-```
+## Customizing transaction names
 
-The log handler will throw an exception if the New Relic PHP module is not installed, so don't enable this in your 
-development environment.
+By default the transaction name will use the `controller@action` assigned to the route. If that fails, it will use the 
+route's name. If no name is defined, it will fallback to just `index.php`.
+
+If this doesn't meet your requirements, extend the `Nord\Lumen\NewRelic\NewRelicMiddleware` class and override the 
+`getTransactionName()` method, then register that middleware class instead.
 
 ## Running tests
 

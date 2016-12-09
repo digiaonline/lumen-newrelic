@@ -17,38 +17,12 @@ class NewRelicServiceProviderTest extends \PHPUnit_Framework_TestCase
 {
 
     /**
-     * @var array
-     */
-    private static $expectedConfigurationKeys = [
-        'transaction_name_pattern',
-    ];
-
-
-    /**
      * Tests that the service provider registers without issues
      */
     public function testRegisterServiceProvider()
     {
         $app = new Application();
         $app->register(NewRelicServiceProvider::class);
-    }
-
-
-    /**
-     * Tests that the service provider is configured correctly
-     */
-    public function testServiceProviderConfiguration()
-    {
-        $app = new Application();
-        $app->register(NewRelicServiceProvider::class);
-
-        $configKey = NewRelicServiceProvider::CONFIG_KEY;
-
-        $this->assertArrayHasKey($configKey, $app['config']);
-
-        foreach (self::$expectedConfigurationKeys as $expectedConfigurationKey) {
-            $this->assertArrayHasKey($expectedConfigurationKey, $app['config'][$configKey]);
-        }
     }
 
 

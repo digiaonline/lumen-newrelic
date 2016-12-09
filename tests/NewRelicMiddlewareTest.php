@@ -16,7 +16,7 @@ class NewRelicMiddlewareTest extends \PHPUnit_Framework_TestCase
 {
 
     /**
-     *
+     * Test with a closure based route
      */
     public function testClosureBasedTransactionNames()
     {
@@ -28,14 +28,35 @@ class NewRelicMiddlewareTest extends \PHPUnit_Framework_TestCase
 
         $response = $app->handle(Request::create('/', 'GET'));
         $this->assertEquals(200, $response->getStatusCode());
-        $this->assertEquals('index.php index.php', $response->getContent());
+        $this->assertEquals('index.php', $response->getContent());
     }
 
 
     /**
-     *
+     * Test with a controller based route
      */
     public function testControllerBasedTransactionNames()
+    {
+        $app = $this->getApplication();
+
+        $app->get('/route', [
+            'as' => 'routeName',
+            function() {
+                return 'Hello World';
+            },
+        ]);
+
+        $response = $app->handle(Request::create('/route', 'GET'));
+        $this->assertEquals(200, $response->getStatusCode());
+        $this->assertEquals('routeName',
+            $response->getContent());
+    }
+
+
+    /**
+     * Test with a named route
+     */
+    public function testNamedRouteTransactionNames()
     {
         $app = $this->getApplication();
 
@@ -46,7 +67,7 @@ class NewRelicMiddlewareTest extends \PHPUnit_Framework_TestCase
 
         $response = $app->handle(Request::create('/route/1', 'GET'));
         $this->assertEquals(200, $response->getStatusCode());
-        $this->assertEquals('Nord\Lumen\NewRelic\Tests\NewRelicTestController@testAction routeName',
+        $this->assertEquals('Nord\Lumen\NewRelic\Tests\NewRelicTestController@testAction',
             $response->getContent());
     }
 
