@@ -44,8 +44,8 @@ Now, add the middleware too:
 
 ```php
 $app->middleware([
-	.....
-	'Nord\Lumen\Cors\CorsMiddleware',
+	...
+	Nord\Lumen\NewRelic\NewRelicMiddleware::class,
 ]);
 ```
 
