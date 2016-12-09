@@ -9,17 +9,11 @@
             "email": "sam.stenvall@nordsoftware.com"
         }
     ],
-    "repositories": [
-        {
-            "type": "vcs",
-            "url": "https://github.com/nordsoftware/lumen-chained-exception-handler.git"
-        }
-    ],
     "require": {
         "php": ">=5.6.4",
         "intouch/newrelic": "^1.0",
         "illuminate/support": "^5.2",
-        "nordsoftware/lumen-chained-exception-handler": "dev-master"
+        "nordsoftware/lumen-chained-exception-handler": "^1.0"
     },
     "require-dev": {
         "laravel/lumen-framework": "^5.3",

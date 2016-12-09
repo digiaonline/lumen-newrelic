@@ -2,6 +2,8 @@
 
 namespace Nord\Lumen\NewRelic\Tests;
 
+use Illuminate\Http\Request;
+use Intouch\Newrelic\Newrelic;
 use Laravel\Lumen\Application;
 use Nord\Lumen\ChainedExceptionHandler\ChainedExceptionHandler;
 use Nord\Lumen\NewRelic\NewRelicExceptionHandler;
@@ -52,15 +54,13 @@ class NewRelicServiceProviderTest extends \PHPUnit_Framework_TestCase
 
     /**
      * Tests that the exception handler is added correctly
-     *
-     * @expectedException \Exception
      */
-    public function testRegisterMonologHandler()
+    public function testRegisterExceptionHandler()
     {
         $app = new Application();
         $app->register(NewRelicServiceProvider::class);
 
-        $app->singleton(
+        $app->instance(
             \Illuminate\Contracts\Debug\ExceptionHandler::class,
             new ChainedExceptionHandler(
                 new \Laravel\Lumen\Exceptions\Handler(), [
@@ -68,6 +68,15 @@ class NewRelicServiceProviderTest extends \PHPUnit_Framework_TestCase
             ])
         );
 
-        throw new \Exception();
+        // Define a route that throws an exception
+        $app->get('/', function() {
+            throw new \Exception();
+        });
+
+        // Verify that the error handling doesn't silenty fail (which would happen if the exception handler isn't 
+        // registered correctly)
+        $response = $app->handle(Request::create('/', 'GET'));
+        $this->assertEquals(500, $response->getStatusCode());
+        $this->assertContains('Whoops, looks like something went wrong', $response->getContent());
     }
 }
