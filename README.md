@@ -1,7 +1,7 @@
 # lumen-newrelic
 
-New Relic instrumentation for the Lumen framework. When installed this library will ensure that your transactions are 
-properly named and that your exceptions are properly logged in New Relic.
+This library provides New Relic instrumentation for the Lumen framework. When installed this library will ensure that 
+your transactions are properly named and that your exceptions are properly logged in New Relic.
 
 ## Requirements
 
@@ -21,11 +21,22 @@ composer require nordsoftware/lumen-newrelic
 
 ### Bootstrapping
 
-Add the following lines to ```bootstrap/app.php```:
+In `bootstrap/app.php`, replace the `$app->singleton()` call which registers the exception handler with the following 
+snippet:
 
 ```php
-$app->register('Nord\Lumen\Cors\CorsServiceProvider');
+$app->instance(
+    Illuminate\Contracts\Debug\ExceptionHandler::class,
+    new Nord\Lumen\ChainedExceptionHandler\ChainedExceptionHandler(
+        new Laravel\Lumen\Exceptions\Handler(),
+        [new Nord\Lumen\NewRelic\NewRelicExceptionHandler()]
+    )
+);
 ```
+
+This will ensure that exceptions are correctly reported to New Relic.
+
+Now, add the middleware too:
 
 ```php
 $app->middleware([
