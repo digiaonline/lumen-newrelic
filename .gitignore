@@ -1,4 +1,5 @@
 /.idea
+/build
 /storage
 /vendor
 composer.phar
