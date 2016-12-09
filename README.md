@@ -1,5 +1,9 @@
 # lumen-newrelic
 
+[![Build Status](https://travis-ci.org/nordsoftware/lumen-newrelic.svg?branch=travis)](https://travis-ci.org/nordsoftware/lumen-newrelic)
+[![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/nordsoftware/lumen-newrelic/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/nordsoftware/lumen-newrelic/?branch=master)
+[![Coverage Status](https://coveralls.io/repos/github/nordsoftware/lumen-newrelic/badge.svg?branch=travis)](https://coveralls.io/github/nordsoftware/lumen-newrelic?branch=travis)
+
 This library provides New Relic instrumentation for the Lumen framework. When installed this library will ensure that 
 your transactions are properly named and that your exceptions are properly logged in New Relic.
 
