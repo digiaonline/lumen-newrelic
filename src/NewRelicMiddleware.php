@@ -8,7 +8,7 @@ use Intouch\Newrelic\Newrelic;
 
 /**
  * Class NewRelicMiddleware
- * @package Nord\Lumen\NewRelic\Middleware
+ * @package Nord\Lumen\NewRelic
  */
 class NewRelicMiddleware
 {

@@ -7,7 +7,7 @@ use Intouch\Newrelic\Newrelic;
 
 /**
  * Class NewRelicServiceProvider
- * @package Nord\Lumen\NewRelic\Providers
+ * @package Nord\Lumen\NewRelic
  */
 class NewRelicServiceProvider extends ServiceProvider
 {
