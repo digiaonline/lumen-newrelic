@@ -3,7 +3,6 @@
 namespace Nord\Lumen\NewRelic\Tests;
 
 use Illuminate\Http\Request;
-use Intouch\Newrelic\Newrelic;
 use Laravel\Lumen\Application;
 use Nord\Lumen\ChainedExceptionHandler\ChainedExceptionHandler;
 use Nord\Lumen\NewRelic\NewRelicExceptionHandler;
