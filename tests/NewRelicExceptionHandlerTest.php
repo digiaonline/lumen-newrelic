@@ -46,6 +46,16 @@ class NewRelicExceptionHandlerTest extends \PHPUnit_Framework_TestCase
         $handler->report(new InvalidArgumentException('testReportIgnoredException'));
     }
 
+
+    /**
+     * @expectedException \Symfony\Component\HttpKernel\Exception\NotFoundHttpException
+     */
+    public function testIgnoreNothing()
+    {
+        $handler = new TestNewRelicExceptionHandler([]);
+        $handler->report(new NotFoundHttpException());
+    }
+
 }
 
 /**

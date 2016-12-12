@@ -25,11 +25,12 @@ class NewRelicExceptionHandler implements ExceptionHandler
     /**
      * NewRelicExceptionHandler constructor.
      *
-     * @param array $ignoredExceptions (optional)
+     * @param array|false $ignoredExceptions (optional) a list of exceptions to ignore, or false to use the default
+     *                                       set
      */
-    public function __construct(array $ignoredExceptions = [])
+    public function __construct($ignoredExceptions = false)
     {
-        if (!empty($ignoredExceptions)) {
+        if (is_array($ignoredExceptions)) {
             $this->ignoredExceptions = $ignoredExceptions;
         }
     }
