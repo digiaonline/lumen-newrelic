@@ -57,6 +57,21 @@ Finally, register the service provider:
 $app->register(Nord\Lumen\NewRelic\NewRelicServiceProvider::class);
 ```
 
+## Ignoring certain exceptions
+
+By default the exception handler ignores exceptions of type 
+`Symfony\Component\HttpKernel\Exception\NotFoundHttpException`. You can customize the list of ignored exceptions by 
+passing an array to the exception handler's constructor:
+
+```php
+$exceptionHandler = new Nord\Lumen\NewRelic\NewRelicExceptionHandler([
+	FooException::class,
+	BarException::class,
+]);
+```
+
+If you don't want any exception to be ignored, pass an empty array to the constructor.
+
 ## Customizing transaction names
 
 By default the transaction name will use the `controller@action` assigned to the route. If that fails, it will use the 
