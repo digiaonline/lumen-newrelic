@@ -33,7 +33,7 @@ snippet:
 $app->instance(
     Illuminate\Contracts\Debug\ExceptionHandler::class,
     new Nord\Lumen\ChainedExceptionHandler\ChainedExceptionHandler(
-        new Laravel\Lumen\Exceptions\Handler(),
+        new \App\Exceptions\Handler(),
         [new Nord\Lumen\NewRelic\NewRelicExceptionHandler()]
     )
 );
