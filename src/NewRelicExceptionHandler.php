@@ -77,4 +77,13 @@ class NewRelicExceptionHandler implements ExceptionHandler
         }
     }
 
+    /**
+     * Original handler's function
+     *
+     * @param Exception $e
+     */
+    public function shouldReport(Exception $e)
+    {
+        return $this->primaryHandler->shouldReport($e);
+    }
 }
