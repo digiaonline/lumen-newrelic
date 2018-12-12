@@ -20,6 +20,6 @@ class NewRelicBackgroundJobMiddleware extends NewRelicMiddleware
         // Mark the request as a background job
         $this->newRelic->backgroundJob();
 
-        return parent::handle($request, $next);
+        return $next($request);
     }
 }
