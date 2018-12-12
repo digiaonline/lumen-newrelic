@@ -1,18 +1,17 @@
 # lumen-newrelic
 
 [![Build Status](https://travis-ci.org/digiaonline/lumen-newrelic.svg?branch=develop)](https://travis-ci.org/digiaonline/lumen-newrelic)
-[![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/nordsoftware/lumen-newrelic/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/nordsoftware/lumen-newrelic/?branch=master)
-[![Coverage Status](https://coveralls.io/repos/github/nordsoftware/lumen-newrelic/badge.svg?branch=travis)](https://coveralls.io/github/nordsoftware/lumen-newrelic?branch=travis)
-[![Code Climate](https://codeclimate.com/github/nordsoftware/lumen-newrelic/badges/gpa.svg)](https://codeclimate.com/github/nordsoftware/lumen-newrelic)
+[![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/digiaonline/lumen-newrelic/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/digiaonline/lumen-newrelic/?branch=master)
+[![Coverage Status](https://coveralls.io/repos/github/digiaonline/lumen-newrelic/badge.svg?branch=master)](https://coveralls.io/github/digiaonline/lumen-newrelic?branch=master)
 
 This library provides New Relic instrumentation for the Lumen framework. When installed this library will ensure that 
 your transactions are properly named and that your exceptions are properly logged in New Relic.
 
 ## Requirements
 
-- PHP 5.6 or newer
+- PHP >= 7.1
 - [Composer](http://getcomposer.org)
-- [Lumen](https://lumen.laravel.com/) 5.2 or newer
+- [Lumen](https://lumen.laravel.com/) 5.5 or newer
 
 ## Usage
 

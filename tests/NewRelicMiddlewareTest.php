@@ -2,54 +2,42 @@
 
 namespace Nord\Lumen\NewRelic\Tests;
 
-use Closure;
 use Illuminate\Http\Request;
+use Illuminate\Http\Response;
+use Intouch\Newrelic\Newrelic;
 use Laravel\Lumen\Application;
+use Nord\Lumen\NewRelic\NewRelicBackgroundJobMiddleware;
 use Nord\Lumen\NewRelic\NewRelicMiddleware;
-use Nord\Lumen\NewRelic\NewRelicServiceProvider;
+use PHPUnit\Framework\TestCase;
 
 /**
  * Class NewRelicMiddlewareTest
  * @package Nord\Lumen\NewRelic\Tests
  */
-class NewRelicMiddlewareTest extends \PHPUnit_Framework_TestCase
+class NewRelicMiddlewareTest extends TestCase
 {
 
     /**
-     * Test with a closure based route
+     * Test with an unnamed closure based route
      */
     public function testClosureBasedTransactionNames()
     {
-        $app = $this->getApplication();
+        $newrelic = $this->getMockedNewRelic();
 
-        $app->get('/', function() {
+        $app = new Application();
+        $app->instance(Newrelic::class, $newrelic);
+        $app->middleware([NewRelicMiddleware::class]);
+
+        $app->router->get('/', function () {
             return 'Hello World';
         });
 
+        $newrelic->expects($this->once())
+                 ->method('nameTransaction')
+                 ->with('index.php');
+
         $response = $app->handle(Request::create('/', 'GET'));
         $this->assertEquals(200, $response->getStatusCode());
-        $this->assertEquals('index.php', $response->getContent());
-    }
-
-
-    /**
-     * Test with a controller based route
-     */
-    public function testControllerBasedTransactionNames()
-    {
-        $app = $this->getApplication();
-
-        $app->get('/route', [
-            'as' => 'routeName',
-            function() {
-                return 'Hello World';
-            },
-        ]);
-
-        $response = $app->handle(Request::create('/route', 'GET'));
-        $this->assertEquals(200, $response->getStatusCode());
-        $this->assertEquals('routeName',
-            $response->getContent());
     }
 
 
@@ -58,51 +46,95 @@ class NewRelicMiddlewareTest extends \PHPUnit_Framework_TestCase
      */
     public function testNamedRouteTransactionNames()
     {
-        $app = $this->getApplication();
+        $newrelic = $this->getMockedNewRelic();
 
-        $app->get('/route/{id}', [
+        $app = new Application();
+        $app->instance(Newrelic::class, $newrelic);
+        $app->middleware([NewRelicMiddleware::class]);
+
+        $app->router->get('/route', [
+            'as' => 'routeName',
+            function () {
+                return 'Hello World';
+            },
+        ]);
+
+        $newrelic->expects($this->once())
+                 ->method('nameTransaction')
+                 ->with('routeName');
+
+        $response = $app->handle(Request::create('/route', 'GET'));
+        $this->assertEquals(200, $response->getStatusCode());
+    }
+
+
+    /**
+     * Test with a controller based route
+     */
+    public function testControllerBasedTransactionNames()
+    {
+        $newrelic = $this->getMockedNewRelic();
+
+        $app = new Application();
+        $app->instance(Newrelic::class, $newrelic);
+        $app->middleware([NewRelicMiddleware::class]);
+
+        $app->router->get('/route/{id}', [
             'as'   => 'routeName',
             'uses' => 'Nord\Lumen\NewRelic\Tests\NewRelicTestController@testAction',
         ]);
 
+        $newrelic->expects($this->once())
+                 ->method('nameTransaction')
+                 ->with('Nord\Lumen\NewRelic\Tests\NewRelicTestController@testAction');
+
         $response = $app->handle(Request::create('/route/1', 'GET'));
         $this->assertEquals(200, $response->getStatusCode());
-        $this->assertEquals('Nord\Lumen\NewRelic\Tests\NewRelicTestController@testAction',
-            $response->getContent());
     }
 
 
     /**
-     * @return Application
+     * Tests that the background job middleware in conjunction with the transaction naming middleware works properly
      */
-    private function getApplication()
+    public function testBackgroundJobMiddleware()
     {
+        $newrelic = $this->getMockedNewRelic();
+
         $app = new Application();
-        $app->register(NewRelicServiceProvider::class);
-        $app->middleware(NewRelicTestMiddleware::class);
+        $app->instance(Newrelic::class, $newrelic);
 
-        return $app;
+        $app->router->get('/route/{id}', [
+            'middleware' => [
+                NewRelicBackgroundJobMiddleware::class,
+                NewRelicMiddleware::class,
+            ],
+            'uses'       => 'Nord\Lumen\NewRelic\Tests\NewRelicTestController@testAction',
+        ]);
+
+        $newrelic->expects($this->once())
+                 ->method('backgroundJob');
+
+        $newrelic->expects($this->once())
+                 ->method('nameTransaction')
+                 ->with('Nord\Lumen\NewRelic\Tests\NewRelicTestController@testAction');
+
+        $response = $app->handle(Request::create('/route/1', 'GET'));
+        
+        $this->assertEquals(200, $response->getStatusCode());
     }
 
-}
-
-/**
- * Class NewRelicTestMiddleware
- * @package Nord\Lumen\NewRelic\Tests
- */
-class NewRelicTestMiddleware extends NewRelicMiddleware
-{
-
+    
     /**
-     * @inheritdoc
+     * @return \PHPUnit_Framework_MockObject_MockObject|Newrelic
      */
-    public function handle(Request $request, Closure $next)
+    private function getMockedNewRelic()
     {
-        $next($request);
+        $newrelic = $this->getMockBuilder(Newrelic::class)
+                         ->setMethods(['backgroundJob', 'nameTransaction'])
+                         ->getMock();
 
-        return response($this->getTransactionName($request));
+        return $newrelic;
     }
-
 }
 
 /**
@@ -114,6 +146,6 @@ class NewRelicTestController
 
     public function testAction()
     {
-        return response('testAction');
+        return new Response();
     }
 }
