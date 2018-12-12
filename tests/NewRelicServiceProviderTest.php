@@ -7,12 +7,13 @@ use Laravel\Lumen\Application;
 use Nord\Lumen\ChainedExceptionHandler\ChainedExceptionHandler;
 use Nord\Lumen\NewRelic\NewRelicExceptionHandler;
 use Nord\Lumen\NewRelic\NewRelicServiceProvider;
+use PHPUnit\Framework\TestCase;
 
 /**
  * Class NewRelicServiceProviderTest
  * @package Nord\Lumen\NewRelic\Tests
  */
-class NewRelicServiceProviderTest extends \PHPUnit_Framework_TestCase
+class NewRelicServiceProviderTest extends TestCase
 {
 
     /**
@@ -22,6 +23,8 @@ class NewRelicServiceProviderTest extends \PHPUnit_Framework_TestCase
     {
         $app = new Application();
         $app->register(NewRelicServiceProvider::class);
+
+        $this->addToAssertionCount(1);
     }
 
 

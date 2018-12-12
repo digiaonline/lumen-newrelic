@@ -8,12 +8,13 @@ use Intouch\Newrelic\Newrelic;
 use Laravel\Lumen\Application;
 use Nord\Lumen\NewRelic\NewRelicBackgroundJobMiddleware;
 use Nord\Lumen\NewRelic\NewRelicMiddleware;
+use PHPUnit\Framework\TestCase;
 
 /**
  * Class NewRelicMiddlewareTest
  * @package Nord\Lumen\NewRelic\Tests
  */
-class NewRelicMiddlewareTest extends \PHPUnit_Framework_TestCase
+class NewRelicMiddlewareTest extends TestCase
 {
 
     /**

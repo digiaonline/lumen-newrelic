@@ -5,13 +5,14 @@ namespace Nord\Lumen\NewRelic\Tests;
 use Exception;
 use InvalidArgumentException;
 use Nord\Lumen\NewRelic\NewRelicExceptionHandler;
+use PHPUnit\Framework\TestCase;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 /**
  * Class NewRelicExceptionHandlerTest
  * @package Nord\Lumen\NewRelic\Tests
  */
-class NewRelicExceptionHandlerTest extends \PHPUnit_Framework_TestCase
+class NewRelicExceptionHandlerTest extends TestCase
 {
 
     /**
@@ -34,6 +35,8 @@ class NewRelicExceptionHandlerTest extends \PHPUnit_Framework_TestCase
     {
         $handler = new TestNewRelicExceptionHandler();
         $handler->report(new NotFoundHttpException());
+        
+        $this->addToAssertionCount(1);
     }
 
 
@@ -44,6 +47,8 @@ class NewRelicExceptionHandlerTest extends \PHPUnit_Framework_TestCase
     {
         $handler = new TestNewRelicExceptionHandler([InvalidArgumentException::class]);
         $handler->report(new InvalidArgumentException('testReportIgnoredException'));
+
+        $this->addToAssertionCount(1);
     }
 
 

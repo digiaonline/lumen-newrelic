@@ -10,9 +10,9 @@ your transactions are properly named and that your exceptions are properly logge
 
 ## Requirements
 
-- PHP 5.6 or newer
+- PHP >= 7.1
 - [Composer](http://getcomposer.org)
-- [Lumen](https://lumen.laravel.com/) 5.2 or newer
+- [Lumen](https://lumen.laravel.com/) 5.5 or newer
 
 ## Usage
 
