@@ -27,7 +27,7 @@ class NewRelicMiddlewareTest extends \PHPUnit_Framework_TestCase
         $app->instance(Newrelic::class, $newrelic);
         $app->middleware([NewRelicMiddleware::class]);
 
-        $app->get('/', function () {
+        $app->router->get('/', function () {
             return 'Hello World';
         });
 
@@ -51,7 +51,7 @@ class NewRelicMiddlewareTest extends \PHPUnit_Framework_TestCase
         $app->instance(Newrelic::class, $newrelic);
         $app->middleware([NewRelicMiddleware::class]);
 
-        $app->get('/route', [
+        $app->router->get('/route', [
             'as' => 'routeName',
             function () {
                 return 'Hello World';
@@ -78,7 +78,7 @@ class NewRelicMiddlewareTest extends \PHPUnit_Framework_TestCase
         $app->instance(Newrelic::class, $newrelic);
         $app->middleware([NewRelicMiddleware::class]);
 
-        $app->get('/route/{id}', [
+        $app->router->get('/route/{id}', [
             'as'   => 'routeName',
             'uses' => 'Nord\Lumen\NewRelic\Tests\NewRelicTestController@testAction',
         ]);
@@ -102,7 +102,7 @@ class NewRelicMiddlewareTest extends \PHPUnit_Framework_TestCase
         $app = new Application();
         $app->instance(Newrelic::class, $newrelic);
 
-        $app->get('/route/{id}', [
+        $app->router->get('/route/{id}', [
             'middleware' => [
                 NewRelicBackgroundJobMiddleware::class,
                 NewRelicMiddleware::class,

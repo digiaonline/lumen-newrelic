@@ -42,7 +42,7 @@ class NewRelicServiceProviderTest extends \PHPUnit_Framework_TestCase
         );
 
         // Define a route that throws an exception
-        $app->get('/', function() {
+        $app->router->get('/', function() {
             throw new \Exception();
         });
 
