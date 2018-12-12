@@ -81,6 +81,12 @@ route's name. If no name is defined, it will fallback to just `index.php`.
 If this doesn't meet your requirements, extend the `Nord\Lumen\NewRelic\NewRelicMiddleware` class and override the 
 `getTransactionName()` method, then register that middleware class instead.
 
+## Marking transactions as background jobs
+
+If you have a dedicated route for webhooks, notifications, or other long-running background tasks you can apply the 
+`Nord\Lumen\NewRelic\NewRelicBackgroundJobMiddleware` to the route in question. This will mark the transaction as a 
+background job in New Relic so that long processing times don't skew your response time graphs.
+
 ## Running tests
 
 Clone the project and install its dependencies by running:
