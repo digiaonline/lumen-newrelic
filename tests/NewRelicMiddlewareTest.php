@@ -33,9 +33,9 @@ class NewRelicMiddlewareTest extends \PHPUnit_Framework_TestCase
 
 
     /**
-     * Test with a controller based route
+     * Test with a named route
      */
-    public function testControllerBasedTransactionNames()
+    public function testNamedRouteTransactionNames()
     {
         $app = $this->getApplication();
 
@@ -54,9 +54,9 @@ class NewRelicMiddlewareTest extends \PHPUnit_Framework_TestCase
 
 
     /**
-     * Test with a named route
+     * Test with a controller based route testNamedRouteTransactionNames
      */
-    public function testNamedRouteTransactionNames()
+    public function testControllerBasedTransactionNames()
     {
         $app = $this->getApplication();
 
