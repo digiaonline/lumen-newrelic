@@ -3,3 +3,4 @@
 /storage
 /vendor
 composer.phar
+composer.lock
