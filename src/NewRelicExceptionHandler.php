@@ -41,7 +41,7 @@ class NewRelicExceptionHandler implements ExceptionHandler
      */
     public function report(Exception $e)
     {
-        if (!in_array(get_class($e), $this->ignoredExceptions)) {
+        if ($this->shouldReport($e)) {
             $this->logException($e);
         }
     }
@@ -64,6 +64,18 @@ class NewRelicExceptionHandler implements ExceptionHandler
 
     }
 
+    /**
+     * @inheritdoc
+     */
+    public function shouldReport(Exception $e)
+    {
+        foreach ($this->ignoredExceptions as $type) {
+            if ($e instanceof $type) {
+                return false;
+            }
+        }
+        return true;
+    }
 
     /**
      * Logs the exception to New Relic (if the extension is loaded)
