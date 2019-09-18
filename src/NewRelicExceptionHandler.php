@@ -40,7 +40,7 @@ class NewRelicExceptionHandler implements ExceptionHandler
     {
         foreach ($this->ignoredExceptions as $ignored) {
             if ($e instanceof $ignored) {
-                return false;
+                return;
             }
         }
         $this->logException($e);
