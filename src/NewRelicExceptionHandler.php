@@ -12,7 +12,6 @@ use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
  */
 class NewRelicExceptionHandler implements ExceptionHandler
 {
-
     /**
      * @var array list of class names of exceptions that should not be reported to New Relic. Defaults to the
      *            NotFoundHttpException class used for 404 requests.
@@ -20,7 +19,6 @@ class NewRelicExceptionHandler implements ExceptionHandler
     protected $ignoredExceptions = [
         NotFoundHttpException::class,
     ];
-
 
     /**
      * NewRelicExceptionHandler constructor.
@@ -35,35 +33,32 @@ class NewRelicExceptionHandler implements ExceptionHandler
         }
     }
 
-
     /**
      * @inheritdoc
      */
     public function report(Exception $e)
     {
-        if (!in_array(get_class($e), $this->ignoredExceptions)) {
-            $this->logException($e);
+        foreach ($this->ignoredExceptions as $ignored) {
+            if ($e instanceof $ignored) {
+                return;
+            }
         }
+        $this->logException($e);
     }
-
 
     /**
      * @inheritdoc
      */
     public function render($request, Exception $e)
     {
-
     }
-
 
     /**
      * @inheritdoc
      */
     public function renderForConsole($output, Exception $e)
     {
-
     }
-
 
     /**
      * Logs the exception to New Relic (if the extension is loaded)
@@ -76,5 +71,4 @@ class NewRelicExceptionHandler implements ExceptionHandler
             newrelic_notice_error($e->getMessage(), $e);
         }
     }
-
 }
