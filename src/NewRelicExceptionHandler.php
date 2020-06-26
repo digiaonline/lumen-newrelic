@@ -2,7 +2,7 @@
 
 namespace Nord\Lumen\NewRelic;
 
-use Exception;
+use Throwable;
 use Illuminate\Contracts\Debug\ExceptionHandler;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
@@ -39,7 +39,7 @@ class NewRelicExceptionHandler implements ExceptionHandler
     /**
      * @inheritdoc
      */
-    public function report(Exception $e)
+    public function report(Throwable $e)
     {
         if ($this->shouldReport($e)) {
             $this->logException($e);
@@ -50,7 +50,7 @@ class NewRelicExceptionHandler implements ExceptionHandler
     /**
      * @inheritdoc
      */
-    public function render($request, Exception $e)
+    public function render($request, Throwable $e)
     {
 
     }
@@ -59,7 +59,7 @@ class NewRelicExceptionHandler implements ExceptionHandler
     /**
      * @inheritdoc
      */
-    public function renderForConsole($output, Exception $e)
+    public function renderForConsole($output, Throwable $e)
     {
 
     }
@@ -67,7 +67,7 @@ class NewRelicExceptionHandler implements ExceptionHandler
     /**
      * @inheritdoc
      */
-    public function shouldReport(Exception $e)
+    public function shouldReport(Throwable $e)
     {
         foreach ($this->ignoredExceptions as $type) {
             if ($e instanceof $type) {
@@ -82,7 +82,7 @@ class NewRelicExceptionHandler implements ExceptionHandler
      *
      * @param Exception $e
      */
-    protected function logException(Exception $e)
+    protected function logException(Throwable $e)
     {
         if (extension_loaded('newrelic')) {
             newrelic_notice_error($e->getMessage(), $e);
