@@ -34,7 +34,7 @@ The environment variables available are:
 * `NEW_RELIC_APP_NAME`
 * `NEW_RELIC_LICENSE_KEY`
 
-Check out the description in `/config/newRelic.ini` for an explanation of the effect.
+Check out the description in `/config/newRelic.php` for an explanation of the effect.
 
 ### Bootstrapping
 
