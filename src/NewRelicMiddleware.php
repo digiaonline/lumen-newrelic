@@ -43,6 +43,10 @@ class NewRelicMiddleware
         $response = $next($request);
 
         $this->newRelic->nameTransaction($this->getTransactionName($request));
+        $this->newRelic->setAppName(
+            config('newRelic.application_name'),
+            config('newRelic.license')
+        );
 
         return $response;
     }
