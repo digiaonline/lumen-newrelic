@@ -22,7 +22,7 @@ class NewRelicServiceProvider extends ServiceProvider
         });
 
         $this->mergeConfigFrom(
-            __DIR__.'/../config/newrelic.php', 'newRelic'
+            __DIR__.'/../config/newRelic.php', 'newRelic'
         );
     }
 
