@@ -20,6 +20,10 @@ class NewRelicServiceProvider extends ServiceProvider
         $this->app->singleton(Newrelic::class, function() {
             return new Newrelic();
         });
+
+        $this->mergeConfigFrom(
+            __DIR__.'/../config/newrelic.php', 'newRelic'
+        );
     }
 
 }
