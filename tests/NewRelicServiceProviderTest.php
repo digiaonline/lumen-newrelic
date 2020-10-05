@@ -8,6 +8,7 @@ use Nord\Lumen\ChainedExceptionHandler\ChainedExceptionHandler;
 use Nord\Lumen\NewRelic\NewRelicExceptionHandler;
 use Nord\Lumen\NewRelic\NewRelicServiceProvider;
 use PHPUnit\Framework\TestCase;
+use Symfony\Component\HttpKernel\Exception\HttpException;
 
 /**
  * Class NewRelicServiceProviderTest
@@ -46,13 +47,13 @@ class NewRelicServiceProviderTest extends TestCase
 
         // Define a route that throws an exception
         $app->router->get('/', function() {
-            throw new \Exception();
+            throw new HttpException(550);
         });
 
         // Verify that the error handling doesn't silenty fail (which would happen if the exception handler isn't 
         // registered correctly)
         $response = $app->handle(Request::create('/', 'GET'));
-        $this->assertEquals(500, $response->getStatusCode());
+        $this->assertEquals(550, $response->getStatusCode());
         $this->assertContains('Whoops, looks like something went wrong', $response->getContent());
     }
 }
