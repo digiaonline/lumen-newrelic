@@ -24,6 +24,11 @@ class NewRelicServiceProvider extends ServiceProvider
         $this->mergeConfigFrom(
             __DIR__.'/../config/newRelic.php', 'newRelic'
         );
+
+        // This will make sure to not call configure() on non-Lumen apps
+        if ($this->app instanceof \Laravel\Lumen\Application) {
+            $this->app->configure('newRelic');
+        }
     }
 
 }
