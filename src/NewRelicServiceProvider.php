@@ -21,9 +21,11 @@ class NewRelicServiceProvider extends ServiceProvider
             return new Newrelic();
         });
 
-        $this->mergeConfigFrom(
-            __DIR__.'/../config/newRelic.php', 'newRelic'
-        );
+        if (\file_exists(__DIR__.'/../config/newRelic.php')) {
+            $this->mergeConfigFrom(
+                __DIR__.'/../config/newRelic.php', 'newRelic'
+            );
+        }
 
         // This will make sure to not call configure() on non-Lumen apps
         if ($this->app instanceof \Laravel\Lumen\Application) {
