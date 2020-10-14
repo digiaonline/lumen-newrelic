@@ -23,6 +23,19 @@ Run the following command to install the package through Composer:
 composer require nordsoftware/lumen-newrelic
 ```
 
+### Configuration
+
+You don't have to set any config values if you are happy to rely on the content of your `newrelic.ini` file. However,
+it's possible to override the license and application name using environment variables or the `.env` file. This can be
+useful if you deploy the same app in multiple environments, and therefore need distinguished names for each.
+
+The environment variables available are:
+
+* `NEW_RELIC_APP_NAME`
+* `NEW_RELIC_LICENSE_KEY`
+
+Check out the description in `/config/newRelic.php` for an explanation of the effect.
+
 ### Bootstrapping
 
 In `bootstrap/app.php`, replace the `$app->singleton()` call which registers the exception handler with the following 
