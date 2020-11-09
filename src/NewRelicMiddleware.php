@@ -44,8 +44,8 @@ class NewRelicMiddleware
 
         $this->newRelic->nameTransaction($this->getTransactionName($request));
         $this->newRelic->setAppName(
-            config('newRelic.application_name'),
-            config('newRelic.license')
+            config('newrelic.application_name'),
+            config('newrelic.license')
         );
 
         return $response;
