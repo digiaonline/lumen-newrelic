@@ -23,7 +23,7 @@ class NewRelicServiceProvider extends ServiceProvider
 
         if (\file_exists(__DIR__.'/../config/newrelic.php')) {
             $this->mergeConfigFrom(
-                __DIR__.'/../config/newrelic.php', 'newRelic'
+                __DIR__.'/../config/newrelic.php', 'newrelic'
             );
         }
 
