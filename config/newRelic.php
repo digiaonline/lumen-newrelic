@@ -4,6 +4,23 @@ return [
 
     /*
     |--------------------------------------------------------------------------
+    | Override newrelic.ini
+    |--------------------------------------------------------------------------
+    |
+    | This config option enables overriding the application name and license 
+    | specified in the newrelic.ini file. This is useful for cases where you 
+    | cannot set the contents of newrelic.ini, or when you have a multi-site 
+    | server and each site to appear separately in NewRelic.
+    |
+    | As naming is done on a per transaction basis, and can have a performance
+    | impact on the app, this setting defaults to false and must be manally
+    | overridden.
+    | 
+    */
+    'override_ini' => env('NEW_RELIC_OVERRIDE_INI', false),
+
+    /*
+    |--------------------------------------------------------------------------
     | Application Name
     |--------------------------------------------------------------------------
     |

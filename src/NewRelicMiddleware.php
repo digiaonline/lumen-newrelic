@@ -43,10 +43,14 @@ class NewRelicMiddleware
         $response = $next($request);
 
         $this->newRelic->nameTransaction($this->getTransactionName($request));
-        $this->newRelic->setAppName(
-            config('newRelic.application_name'),
-            config('newRelic.license')
-        );
+
+        if (config('newRelic.override_ini')) {
+            $this->newRelic->setAppName(
+                config('newRelic.application_name'),
+                config('newRelic.license'),
+                true
+            );
+        }
 
         return $response;
     }

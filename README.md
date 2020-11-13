@@ -29,10 +29,16 @@ You don't have to set any config values if you are happy to rely on the content 
 it's possible to override the license and application name using environment variables or the `.env` file. This can be
 useful if you deploy the same app in multiple environments, and therefore need distinguished names for each.
 
+Be aware that doing so can have a [small performance impact](https://github.com/In-Touch/newrelic/blob/5dc4eb7a25731f92cdbfb7a094a788cf137df40e/src/Newrelic.php#L82-L87) on the app
+
 The environment variables available are:
 
+* `NEW_RELIC_OVERRIDE_INI` (defaults to `false`)
 * `NEW_RELIC_APP_NAME`
 * `NEW_RELIC_LICENSE_KEY`
+
+If you don't set `NEW_RELIC_OVERRIDE_INI` to `true`, the app will not override the `newrelic.ini` file, regardless of the 
+value of the other two variables.
 
 Check out the description in `/config/newRelic.php` for an explanation of the effect.
 
