@@ -1,6 +1,6 @@
 # lumen-newrelic
 
-[![Build Status](https://travis-ci.org/digiaonline/lumen-newrelic.svg?branch=develop)](https://travis-ci.org/digiaonline/lumen-newrelic)
+[![GitHub Actions status](https://github.com/digiaonline/lumen-newrelic/workflows/Test/badge.svg)](https://github.com/digiaonline/lumen-newrelic/actions)
 [![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/digiaonline/lumen-newrelic/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/digiaonline/lumen-newrelic/?branch=master)
 [![Coverage Status](https://coveralls.io/repos/github/digiaonline/lumen-newrelic/badge.svg?branch=master)](https://coveralls.io/github/digiaonline/lumen-newrelic?branch=master)
 
@@ -9,7 +9,7 @@ your transactions are properly named and that your exceptions are properly logge
 
 ## Requirements
 
-- PHP >= 7.1
+- PHP >= 7.2
 - [Composer](http://getcomposer.org)
 - [Lumen](https://lumen.laravel.com/) 5.5 or newer
 
