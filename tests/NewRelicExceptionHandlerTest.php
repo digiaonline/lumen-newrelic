@@ -7,6 +7,7 @@ use InvalidArgumentException;
 use Nord\Lumen\NewRelic\NewRelicExceptionHandler;
 use PHPUnit\Framework\TestCase;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
+use Throwable;
 
 /**
  * Class NewRelicExceptionHandlerTest
@@ -73,7 +74,7 @@ class TestNewRelicExceptionHandler extends NewRelicExceptionHandler
     /**
      * @inheritdoc
      */
-    protected function logException(Exception $e)
+    protected function logException(Throwable $e)
     {
         // Used to indicate that this method was actually executed
         throw $e;
