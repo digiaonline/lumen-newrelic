@@ -7,6 +7,7 @@ use InvalidArgumentException;
 use Nord\Lumen\NewRelic\NewRelicExceptionHandler;
 use PHPUnit\Framework\TestCase;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
+use Throwable;
 
 /**
  * Class NewRelicExceptionHandlerTest
@@ -17,12 +18,11 @@ class NewRelicExceptionHandlerTest extends TestCase
 
     /**
      * Tests that exceptions that are not on the ignore list get reported
-     *
-     * @expectedException \Exception
-     * @expectedExceptionMessage testReportException
      */
     public function testReportException()
     {
+        $this->expectException(\Exception::class);
+        $this->expectExceptionMessage("testReportException");
         $handler = new TestNewRelicExceptionHandler();
         $handler->report(new Exception('testReportException'));
     }
@@ -50,13 +50,10 @@ class NewRelicExceptionHandlerTest extends TestCase
 
         $this->addToAssertionCount(1);
     }
-
-
-    /**
-     * @expectedException \Symfony\Component\HttpKernel\Exception\NotFoundHttpException
-     */
+    
     public function testIgnoreNothing()
     {
+        $this->expectException(\Symfony\Component\HttpKernel\Exception\NotFoundHttpException::class);
         $handler = new TestNewRelicExceptionHandler([]);
         $handler->report(new NotFoundHttpException());
     }
@@ -73,7 +70,7 @@ class TestNewRelicExceptionHandler extends NewRelicExceptionHandler
     /**
      * @inheritdoc
      */
-    protected function logException(Exception $e)
+    protected function logException(Throwable $e)
     {
         // Used to indicate that this method was actually executed
         throw $e;

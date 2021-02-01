@@ -54,6 +54,6 @@ class NewRelicServiceProviderTest extends TestCase
         // registered correctly)
         $response = $app->handle(Request::create('/', 'GET'));
         $this->assertEquals(550, $response->getStatusCode());
-        $this->assertContains('Whoops, looks like something went wrong', $response->getContent());
+        $this->assertStringContainsString('Whoops, looks like something went wrong', $response->getContent());
     }
 }
