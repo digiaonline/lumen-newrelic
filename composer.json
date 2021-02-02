@@ -10,14 +10,14 @@
         }
     ],
     "require": {
-        "php": "^7.2",
+        "php": "^7.3 | ^8.0",
         "intouch/newrelic": "^1.0",
         "illuminate/support": "^5.5 | ^6.0 | ^7.0 | ^8.0",
         "nordsoftware/lumen-chained-exception-handler": "^2.0"
     },
     "require-dev": {
         "laravel/lumen-framework": "^5.5|^6.0|^7.0|^8.0",
-        "phpunit/phpunit": "^7.5"
+        "phpunit/phpunit": "^9"
     },
     "autoload": {
         "psr-4": {
