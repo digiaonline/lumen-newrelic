@@ -1,8 +1,8 @@
 # lumen-newrelic
 
 [![GitHub Actions status](https://github.com/digiaonline/lumen-newrelic/workflows/Test/badge.svg)](https://github.com/digiaonline/lumen-newrelic/actions)
-[![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/digiaonline/lumen-newrelic/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/digiaonline/lumen-newrelic/?branch=master)
-[![Coverage Status](https://coveralls.io/repos/github/digiaonline/lumen-newrelic/badge.svg?branch=master)](https://coveralls.io/github/digiaonline/lumen-newrelic?branch=master)
+[![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/digiaonline/lumen-newrelic/badges/quality-score.png?b=main)](https://scrutinizer-ci.com/g/digiaonline/lumen-newrelic/?branch=main)
+[![Coverage Status](https://coveralls.io/repos/github/digiaonline/lumen-newrelic/badge.svg?branch=main)](https://coveralls.io/github/digiaonline/lumen-newrelic?branch=main)
 
 This library provides New Relic instrumentation for the Lumen framework. When installed this library will ensure that 
 your transactions are properly named and that your exceptions are properly logged in New Relic.
